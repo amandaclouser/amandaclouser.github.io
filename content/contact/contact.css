@@ -1,0 +1,71 @@
+.bouncy-card {
+  /* Keep existing bouncy-card styles */
+  display: block;
+  text-decoration: none;
+  color: var(--text-color); /* Keep original text color */
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Create flex container for top section with icon and header */
+.bouncy-card-top {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  justify-content: center;
+  gap: .5em;
+}
+
+.bouncy-card i {
+  margin-right: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.bouncy-card h3 {
+  margin: 0;
+}
+
+/* Add padding and separator for contact details */
+.bouncy-card p {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-top: 1px solid var(--border-color);
+  margin: 0;
+}
+
+.bouncy-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.bouncy-card p,
+.bouncy-card i {
+  transition: color 0.3s ease;
+}
+
+.bouncy-card:hover p,
+.bouncy-card:hover i {
+  color: var(--primary-color) !important;
+  fill: var(--primary-color) !important;
+}
+.bouncy-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.click-to-tooltip {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bouncy-card:hover .click-to-tooltip {
+  opacity: 1;
+}

@@ -1,0 +1,416 @@
+/* Beyond Coding Page Styles */
+
+/* General Section Styling */
+.beyond-section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.beyond-section:last-of-type {
+  border-bottom: none;
+}
+
+.beyond-section .section-title i {
+  margin-right: 0.5rem;
+  color: var(--primary-color);
+}
+
+.beyond-intro {
+  padding: 2rem 0 3rem;
+}
+
+.beyond-intro-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* Reading Section */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px var(--shadow-color);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--shadow-color);
+}
+
+.book-cover {
+  height: 300px;
+  overflow: hidden;
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.book-card:hover .book-cover img {
+  transform: scale(1.05);
+}
+
+.book-info {
+  padding: 1.5rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.book-info h3 {
+  margin-bottom: 0.25rem;
+  color: var(--text-color);
+}
+
+.book-info h4 {
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+  font-weight: 500;
+}
+
+.book-category {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.favorite-quote {
+  margin-top: auto;
+  padding-top: 1.5rem;
+  position: relative;
+}
+
+.favorite-quote i {
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  color: var(--primary-color);
+  opacity: 0.3;
+  font-size: 1.2rem;
+}
+
+.favorite-quote p {
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: var(--secondary-color);
+}
+
+/* Crafts Section */
+.crafts-content {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  margin-top: 3rem;
+}
+
+.crafts-description {
+  flex: 1;
+}
+
+.crafts-list {
+  margin-top: 1.5rem;
+  list-style-type: none;
+}
+
+.crafts-list li {
+  margin-bottom: 1rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.crafts-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+.crafts-gallery {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px var(--shadow-color);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  text-align: center;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+  transform: translateY(0);
+}
+
+/* Fishing Section */
+.fishing-content {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.fishing-image {
+  flex: 1;
+}
+
+.fishing-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 3px 15px var(--shadow-color);
+}
+
+.fishing-text {
+  flex: 1;
+}
+
+.fishing-text h3 {
+  margin: 1.5rem 0 1rem;
+  color: var(--text-color);
+}
+
+.fishing-text ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+}
+
+.fishing-text li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.fishing-text li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+/* Travel Section */
+.travel-map {
+  margin: 3rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px var(--shadow-color);
+}
+
+.travel-map img {
+  width: 100%;
+  display: block;
+}
+
+.favorite-destinations h3,
+.travel-philosophy h3 {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.destination-card {
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px var(--shadow-color);
+  transition: transform 0.3s ease;
+}
+
+.destination-card:hover {
+  transform: translateY(-5px);
+}
+
+.destination-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.destination-card h4 {
+  padding: 1rem 1rem 0.5rem;
+  color: var(--text-color);
+}
+
+.destination-card p {
+  padding: 0 1rem 1rem;
+  color: var(--secondary-color);
+}
+
+.travel-philosophy {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Music Section */
+.music-content {
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.genre-tag {
+  background-color: var(--hover-bg);
+  color: var(--primary-color);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+.music-text h3 {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.album {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform 0.3s ease;
+}
+
+.album:hover {
+  transform: translateY(-3px);
+}
+
+.album-cover {
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.album-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.album-info h4 {
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.album-info p {
+  font-size: 0.9rem;
+  color: var(--secondary-color);
+}
+
+/* Final Thoughts Section */
+.final-thoughts {
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.final-thoughts-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.final-thoughts h2 {
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+}
+
+.final-thoughts p {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.final-thoughts .btn {
+  margin-top: 1rem;
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
+  .crafts-content,
+  .fishing-content {
+      flex-direction: column;
+  }
+  
+  .music-content {
+      grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .crafts-gallery {
+      grid-template-columns: 1fr;
+  }
+  
+  .albums-grid {
+      grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .books-grid,
+  .destinations-grid {
+      grid-template-columns: 1fr;
+  }
+}

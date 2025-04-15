@@ -3,130 +3,116 @@ document.addEventListener('DOMContentLoaded', function() {
   const contentEl = document.getElementById('content');
   const navLinks = document.querySelectorAll('.nav-link');
 
-  if (isHomePage()) {        
-    console.log("is home");
-    initDynamicTitlesWithRetry
-}
-
-window.dispatchEvent(new CustomEvent('pageChanged', { 
-    detail: { isHome: true }
-  }));
+    window.dispatchEvent(new CustomEvent('pageChanged', { 
+        detail: { isHome: true }
+    }));
   
-  // When navigating away from home
-  window.dispatchEvent(new CustomEvent('pageChanged', { 
+    // When navigating away from home
+    window.dispatchEvent(new CustomEvent('pageChanged', { 
     detail: { isHome: false }
-  }));
-
-function isHomePage() {
-    // Adapt this logic based on your site structure
-    // For example:
-    return window.location.pathname === '/' || 
-           window.location.pathname === '/index.html' ||
-           document.querySelector('.hero') !== null;
-  }
-
+    }));
   
-  async function loadContent(page) {
-    try {
-        // Default to home if no page specified
-        page = page || 'home';
-        
-        // Remove the # from the page name if present
-        if (page.startsWith('#')) {
-            page = page.substring(1);
-        }
-        
-        // If page is empty, use home
-        if (page === '') {
-            page = 'home';
-        }
+    async function loadContent(page) {
+        try {
+            // Default to home if no page specified
+            page = page || 'home';
+            
+            // Remove the # from the page name if present
+            if (page.startsWith('#')) {
+                page = page.substring(1);
+            }
+            
+            // If page is empty, use home
+            if (page === '') {
+                page = 'home';
+            }
 
-        if (page === 'home' || page === '') {        
-            console.log("is home");
-            initDynamicTitlesWithRetry
-        }
-        
-        const contentEl = document.getElementById('content');
-        
-        // Store current height to prevent layout shift
-        const currentHeight = contentEl.offsetHeight;
-        contentEl.style.minHeight = `${currentHeight}px`;
-        
-        // Remove any previously loaded page-specific stylesheets
-        const oldPageStylesheets = document.querySelectorAll('link[data-page-style]');
-        oldPageStylesheets.forEach(stylesheet => stylesheet.remove());
-        
-        // Remove any previously loaded page-specific scripts
-        const oldPageScripts = document.querySelectorAll('script[data-page-script]');
-        oldPageScripts.forEach(script => script.remove());
-        
-        // Load page-specific CSS if it exists
-        const pageCssPath = `content/${page}/${page}.css`;
-        
-        // Check if the CSS file exists before attempting to load it
-        try {
-            const cssResponse = await fetch(pageCssPath, { method: 'HEAD' });
-            if (cssResponse.ok) {
-                // CSS file exists, load it
-                const linkElement = document.createElement('link');
-                linkElement.rel = 'stylesheet';
-                linkElement.href = pageCssPath;
-                linkElement.setAttribute('data-page-style', page);
-                document.head.appendChild(linkElement);
+            if (page === 'home' || page === '') {        
+                console.log("is home");
+                initDynamicTitlesWithRetry
             }
-        } catch (error) {
-            console.log(`No specific CSS for ${page} page`);
-        }
-        
-        // Fetch the HTML content
-        const response = await fetch(`content/${page}/${page}.html?t=${Date.now()}`);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to load ${page}`);
-        }
-        
-        const html = await response.text();
-        
-        // Update the content
-        contentEl.innerHTML = html;
-        
-        // Load page-specific JS if it exists
-        const pageJsPath = `./content/${page}/${page}.js`;
-        
-        // Check if the JS file exists before attempting to load it
-        try {
-            const jsResponse = await fetch(pageJsPath, { method: 'HEAD' });
-            if (jsResponse.ok) {
-                // JS file exists, load it
-                const scriptElement = document.createElement('script');
-                scriptElement.src = pageJsPath;
-                scriptElement.setAttribute('data-page-script', page);
-                document.body.appendChild(scriptElement);
-                console.log("js page exists: ", {home})
+            
+            const contentEl = document.getElementById('content');
+            
+            // Store current height to prevent layout shift
+            const currentHeight = contentEl.offsetHeight;
+            contentEl.style.minHeight = `${currentHeight}px`;
+            
+            // Remove any previously loaded page-specific stylesheets
+            const oldPageStylesheets = document.querySelectorAll('link[data-page-style]');
+            oldPageStylesheets.forEach(stylesheet => stylesheet.remove());
+            
+            // Remove any previously loaded page-specific scripts
+            const oldPageScripts = document.querySelectorAll('script[data-page-script]');
+            oldPageScripts.forEach(script => script.remove());
+            
+            // Load page-specific CSS if it exists
+            const pageCssPath = `content/${page}/${page}.css`;
+            
+            // Check if the CSS file exists before attempting to load it
+            try {
+                const cssResponse = await fetch(pageCssPath, { method: 'HEAD' });
+                if (cssResponse.ok) {
+                    // CSS file exists, load it
+                    const linkElement = document.createElement('link');
+                    linkElement.rel = 'stylesheet';
+                    linkElement.href = pageCssPath;
+                    linkElement.setAttribute('data-page-style', page);
+                    document.head.appendChild(linkElement);
+                }
+            } catch (error) {
+                console.log(`No specific CSS for ${page} page`);
             }
+        
+            // Fetch the HTML content
+            const response = await fetch(`content/${page}/${page}.html?t=${Date.now()}`);
+            
+            if (!response.ok) {
+                throw new Error(`Failed to load ${page}`);
+            }
+        
+            const html = await response.text();
+            
+            // Update the content
+            contentEl.innerHTML = html;
+            
+            // Load page-specific JS if it exists
+            const pageJsPath = `./content/${page}/${page}.js`;
+            
+            // Check if the JS file exists before attempting to load it
+            try {
+                const jsResponse = await fetch(pageJsPath, { method: 'HEAD' });
+                if (jsResponse.ok) {
+                    // JS file exists, load it
+                    const scriptElement = document.createElement('script');
+                    scriptElement.src = pageJsPath;
+                    scriptElement.setAttribute('data-page-script', page);
+                    document.body.appendChild(scriptElement);
+                    console.log("js page exists: ", {home})
+                }
+            } catch (error) {
+                console.log(`No specific JS for ${page} page`);
+            }
+        
+            // After content is loaded, reset the min-height
+            setTimeout(() => {
+                contentEl.style.minHeight = '';
+            }, 300);
+            
+            // Update navigation, page title, etc.
+            updateNavigation(page);
+            
+            // Scroll to top smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        
         } catch (error) {
-            console.log(`No specific JS for ${page} page`);
+            console.error('Error loading content:', error);
+            document.getElementById('content').innerHTML = `<div class="error">Error loading content: ${error.message}</div>`;
         }
-        
-        // After content is loaded, reset the min-height
-        setTimeout(() => {
-            contentEl.style.minHeight = '';
-        }, 300);
-        
-        // Update navigation, page title, etc.
-        updateNavigation(page);
-        
-        // Scroll to top smoothly
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        
-    } catch (error) {
-        console.error('Error loading content:', error);
-        document.getElementById('content').innerHTML = `<div class="error">Error loading content: ${error.message}</div>`;
     }
-}
 
 
 const readMoreBtn = document.getElementById('read-more-btn');
@@ -300,46 +286,6 @@ function updateNavigation(page) {
   // Load initial content based on URL hash
   loadContent(window.location.hash);
 });
-
-/* skills */
-// This would be part of your main.js file or a separate skills.js file
-
-// Initialize progress bars animation
-function initProgressBars() {
-    const progressBars = document.querySelectorAll('.progress');
-    
-    if (progressBars.length > 0) {
-        // Function to animate progress bars when they come into view
-        const animateProgressBars = function() {
-            progressBars.forEach(bar => {
-                const barPosition = bar.getBoundingClientRect();
-                const windowHeight = window.innerHeight;
-                
-                if (barPosition.top < windowHeight * 0.9) {
-                    // Get the target width from inline style
-                    const targetWidth = bar.style.width;
-                    
-                    // First set width to 0
-                    bar.style.width = '0';
-                    
-                    // Force a reflow
-                    void bar.offsetWidth;
-                    
-                    // Then animate to target width
-                    setTimeout(() => {
-                        bar.style.width = targetWidth;
-                    }, 100);
-                }
-            });
-        };
-        
-        // Run on page load with a slight delay
-        setTimeout(animateProgressBars, 500);
-        
-        // Also run on scroll
-        window.addEventListener('scroll', animateProgressBars);
-    }
-  }
 
   function initDynamicTitlesWithRetry() {
     let attempts = 0;
